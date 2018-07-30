@@ -466,7 +466,7 @@ CC握手成功,浏览器向服务器发起http请求,请求数据包
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/解决8080端口占用问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/关于parseInt的研究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vkcyan">
@@ -485,7 +485,7 @@ CC握手成功,浏览器向服务器发起http请求,请求数据包
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/26/解决8080端口占用问题/" itemprop="url">解决8080端口占用问题</a></h1>
+                <a class="post-title-link" href="/2018/07/26/关于parseInt的研究/" itemprop="url">关于parseInt的学习</a></h1>
         
 
         <div class="post-meta">
@@ -520,8 +520,8 @@ CC握手成功,浏览器向服务器发起http请求,请求数据包
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">开发技巧</span>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
 
@@ -537,7 +537,7 @@ CC握手成功,浏览器向服务器发起http请求,请求数据包
 
           
           
-             <span id="/2018/07/26/解决8080端口占用问题/" class="leancloud_visitors" data-flag-title="解决8080端口占用问题">
+             <span id="/2018/07/26/关于parseInt的研究/" class="leancloud_visitors" data-flag-title="关于parseInt的学习">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -570,21 +570,15 @@ CC握手成功,浏览器向服务器发起http请求,请求数据包
       
         
           
-          解决8080端口占用问题这一定是最简单的办法
-1netstat   -ano|findstr  8080
-
-说明：查看占用8080端口的进程,这里获取进程号
-
-1taskkill  /pid  xxxxx  /f
-
-说明:  运行windows自带taskkill命令，将上面显示的进程号结束掉。
-
-这样比百度的好用,最起码不用找
-
-          
+          #关于parseInt的学习
+​     前面在看题目的时候 偶然看到 使用parseInt 来进行整数判断 但是这里的parseInt是错误示范
+之后了解了一下 发现这和函数 很有研究
+##先看看 w3c怎么说这个的
+12345678parseInt() 函数可解析一个字符串，并返回一个整数。string	必需。要被解析的字符串。radix	    可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。    如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x”
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/26/解决8080端口占用问题/#more" rel="contents">
+            <a class="btn" href="/2018/07/26/关于parseInt的研究/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -805,7 +799,7 @@ next文档 这里下载主题请下载稳定版本
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/关于parseInt的研究/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/解决8080端口占用问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vkcyan">
@@ -824,7 +818,7 @@ next文档 这里下载主题请下载稳定版本
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/26/关于parseInt的研究/" itemprop="url">关于parseInt的学习</a></h1>
+                <a class="post-title-link" href="/2018/07/26/解决8080端口占用问题/" itemprop="url">解决8080端口占用问题</a></h1>
         
 
         <div class="post-meta">
@@ -859,8 +853,8 @@ next文档 这里下载主题请下载稳定版本
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/开发技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">开发技巧</span>
                   </a>
                 </span>
 
@@ -876,7 +870,7 @@ next文档 这里下载主题请下载稳定版本
 
           
           
-             <span id="/2018/07/26/关于parseInt的研究/" class="leancloud_visitors" data-flag-title="关于parseInt的学习">
+             <span id="/2018/07/26/解决8080端口占用问题/" class="leancloud_visitors" data-flag-title="解决8080端口占用问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -909,15 +903,21 @@ next文档 这里下载主题请下载稳定版本
       
         
           
-          #关于parseInt的学习
-​     前面在看题目的时候 偶然看到 使用parseInt 来进行整数判断 但是这里的parseInt是错误示范
-之后了解了一下 发现这和函数 很有研究
-##先看看 w3c怎么说这个的
-12345678parseInt() 函数可解析一个字符串，并返回一个整数。string	必需。要被解析的字符串。radix	    可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。    如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x”
-          ...
+          解决8080端口占用问题这一定是最简单的办法
+1netstat   -ano|findstr  8080
+
+说明：查看占用8080端口的进程,这里获取进程号
+
+1taskkill  /pid  xxxxx  /f
+
+说明:  运行windows自带taskkill命令，将上面显示的进程号结束掉。
+
+这样比百度的好用,最起码不用找
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/26/关于parseInt的研究/#more" rel="contents">
+            <a class="btn" href="/2018/07/26/解决8080端口占用问题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
