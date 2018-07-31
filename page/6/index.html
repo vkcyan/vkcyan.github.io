@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/03/函数声明/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/JavaScript深入 - 原型与原型链/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vkcyan">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/函数声明/" itemprop="url">var foo = function () {} 和 function foo() 有什么区别?</a></h1>
+                <a class="post-title-link" href="/2018/04/26/JavaScript深入 - 原型与原型链/" itemprop="url">JavaScript深入 - 原型与原型链</a></h1>
         
 
         <div class="post-meta">
@@ -313,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T00:00:00+08:00">
-                2018-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T00:00:00+08:00">
+                2018-04-26
               </time>
             
 
@@ -353,7 +353,7 @@
 
           
           
-             <span id="/2018/02/03/函数声明/" class="leancloud_visitors" data-flag-title="var foo = function () {} 和 function foo() 有什么区别?">
+             <span id="/2018/04/26/JavaScript深入 - 原型与原型链/" class="leancloud_visitors" data-flag-title="JavaScript深入 - 原型与原型链">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -386,18 +386,518 @@
       
         
           
-          JavaScript 中，定义函数时用 var foo = function () {} 和 function foo() 有什么区别？参照文章: 知乎
-JavaScript 函数和变量声明的“提前”（hoist）行为
-简单的说  如果我们使用 匿名函数  
-1var a = &#123;&#125;
-这种方式， 编译后变量声明a 会“被提前”了，但是他的赋值（也就是a）并不会被提前。也就是，匿名函数只有在被调用时才被初始化。
-如果使用
-1function a () &#123;&#125;;
+          今天看了github上面的某位大佬对原型与原型链的文章 讲解很透彻 
+原型与原型链
+prototype每个函数都有prototype属性,如下
 
+这个函数的prototype到底是什么呢,是函数的原型吗?
+其实,函数的prototype都会指向一个对象,这个对象 就是调用改构造函数而创建的实例的原型,也就是上图的a b的原型
+什么是原型呢?
+每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型&quot;继承&quot
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/03/函数声明/#more" rel="contents">
+            <a class="btn" href="/2018/04/26/JavaScript深入 - 原型与原型链/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/css隐藏多余文字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vkcyan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://on7r0tqgu.bkt.clouddn.com/FtYgVsDgctT0KkcTOIF8bmSJ5aPi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vkcyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/17/css隐藏多余文字/" itemprop="url">css实现隐藏多余溢出文字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T00:00:00+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/17/css隐藏多余文字/" class="leancloud_visitors" data-flag-title="css实现隐藏多余溢出文字">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          css实现隐藏多余溢出文字12345678910.new_item &#123;    display: inline-block;    width: 80px;    overflow: hidden;    /*overflow 属性规定当内容溢出元素框时发生的事情。hidden 内容会被修剪，并且其余内容是不可见的*/    text-overflow: ellipsis;    /*text-overflow 属性规定当文本溢出包含元素时发生的事情。 显示省略符号来代表被修剪的文本。*
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/17/css隐藏多余文字/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/Vue使用json-server来进行后端数据模拟/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vkcyan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://on7r0tqgu.bkt.clouddn.com/FtYgVsDgctT0KkcTOIF8bmSJ5aPi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vkcyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/Vue使用json-server来进行后端数据模拟/" itemprop="url">Vue使用json-server来进行后端数据模拟</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T00:00:00+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/16/Vue使用json-server来进行后端数据模拟/" class="leancloud_visitors" data-flag-title="Vue使用json-server来进行后端数据模拟">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            正开发过程中 前后端分离或者不分离 ,接口多半是之后与页面的开发 ,所以建立rest的APL的接口 给前端提供虚拟的数据是非常必要的 所以这里我使用了json-server作为工具,支持CORS和JSONP跨域请求，支持GET, POST, PUT, PATCH 和 DELETE 方法,更提供了一系列的查询方法，如limit，order等,接下来我把我自己的上使用心写成文档
+安装首先必须有node环境(都用到json-server一定会有node环境吧)然后全局安装json-server
+1
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/Vue使用json-server来进行后端数据模拟/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/js面试题 4-10 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vkcyan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://on7r0tqgu.bkt.clouddn.com/FtYgVsDgctT0KkcTOIF8bmSJ5aPi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vkcyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/js面试题 4-10 /" itemprop="url">js面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T00:00:00+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">面试题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/10/js面试题 4-10 /" class="leancloud_visitors" data-flag-title="js面试题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          JS：    1、性能优化的方法
+2、js新增属性方法 事件以及兼容性
+
+3、jquery常见的方法
+
+4、JS基本数据类型
+
+5、json 与 string 互相转换
+
+6、Number和string之间的转换
+
+7、json对象，状态码，content，msg;json字符串，转换为json对象的方法
+
+8、trycatch，捕获异常的方式。
+
+9、关于闭包
+
+10、ajax原理、核心方法
+
+11、怎么判断在IE6上是否兼容
+
+12、ajax常用的请求方式，你常用的，除了post，get  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/10/js面试题 4-10 /#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -439,7 +939,7 @@ JavaScript 函数和变量声明的“提前”（hoist）行为
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -489,7 +989,7 @@ JavaScript 函数和变量声明的“提前”（hoist）行为
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -511,7 +1011,7 @@ JavaScript 函数和变量声明的“提前”（hoist）行为
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
