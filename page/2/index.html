@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/flex 布局/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/node.js环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vkcyan">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/30/flex 布局/" itemprop="url">(flex) UI 布局</a></h1>
+                <a class="post-title-link" href="/2018/07/30/node.js环境搭建/" itemprop="url">node.js环境安装</a></h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flex/" itemprop="url" rel="index">
-                    <span itemprop="name">flex</span>
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
                   </a>
                 </span>
 
@@ -353,7 +353,7 @@
 
           
           
-             <span id="/2018/07/30/flex 布局/" class="leancloud_visitors" data-flag-title="(flex) UI 布局">
+             <span id="/2018/07/30/node.js环境搭建/" class="leancloud_visitors" data-flag-title="node.js环境安装">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -386,20 +386,18 @@
       
         
           
-          (flex) UI 布局flex布局无论在pc端还是mobile端或者小程序端都是非常好的布局选择,完全可以代替浮动,非常有学习的必要
-在flex上面的下面三个教程就可以学会了
-MDN上对flex布局的理解
-flex阮一峰大神教程-1
-flex阮一峰大神教程-2
-下面的是小程序端的
-
-index.wxml
-
-1234567891011121314&lt;view class='container'&gt;  &lt;view class='item'&gt;       1  &lt;/view
+          首先环境配置
+node.js环境安装
+https://www.jianshu.com/p/03a76b2e7e00  
+安装服务express作为测试
+https://www.jianshu.com/p/03a76b2e7e00https://jingyan.baidu.com/article/922554468a3466851648f419.html
+如果成功访问了localhost:3000 恭喜 环境已经没有问题了
+接下来就是webpack的安装配置了
+ps: 前几天更新了webpack4
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/30/flex 布局/#more" rel="contents">
+            <a class="btn" href="/2018/07/30/node.js环境搭建/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -799,7 +797,7 @@ unshift()  将参数添加到原数组开头   &gt;&gt;  返
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/关于parseInt的研究/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/26/解决8080端口占用问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vkcyan">
@@ -818,7 +816,7 @@ unshift()  将参数添加到原数组开头   &gt;&gt;  返
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/26/关于parseInt的研究/" itemprop="url">关于parseInt的学习</a></h1>
+                <a class="post-title-link" href="/2018/07/26/解决8080端口占用问题/" itemprop="url">解决8080端口占用问题</a></h1>
         
 
         <div class="post-meta">
@@ -853,8 +851,8 @@ unshift()  将参数添加到原数组开头   &gt;&gt;  返
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/开发技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">开发技巧</span>
                   </a>
                 </span>
 
@@ -870,7 +868,7 @@ unshift()  将参数添加到原数组开头   &gt;&gt;  返
 
           
           
-             <span id="/2018/07/26/关于parseInt的研究/" class="leancloud_visitors" data-flag-title="关于parseInt的学习">
+             <span id="/2018/07/26/解决8080端口占用问题/" class="leancloud_visitors" data-flag-title="解决8080端口占用问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -903,15 +901,21 @@ unshift()  将参数添加到原数组开头   &gt;&gt;  返
       
         
           
-          #关于parseInt的学习
-​     前面在看题目的时候 偶然看到 使用parseInt 来进行整数判断 但是这里的parseInt是错误示范
-之后了解了一下 发现这和函数 很有研究
-##先看看 w3c怎么说这个的
-12345678parseInt() 函数可解析一个字符串，并返回一个整数。string	必需。要被解析的字符串。radix	    可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。    如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x”
-          ...
+          解决8080端口占用问题这一定是最简单的办法
+1netstat   -ano|findstr  8080
+
+说明：查看占用8080端口的进程,这里获取进程号
+
+1taskkill  /pid  xxxxx  /f
+
+说明:  运行windows自带taskkill命令，将上面显示的进程号结束掉。
+
+这样比百度的好用,最起码不用找
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/26/关于parseInt的研究/#more" rel="contents">
+            <a class="btn" href="/2018/07/26/解决8080端口占用问题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
