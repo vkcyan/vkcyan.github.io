@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="备份与恢复备份 备份数据库内容 并不是备份数据库  在Navicat Premium里面直接双击数据库 右击数据库点击-&amp;gt; 转储sql文件 即可保存 在命令行里面 将root用户的base表到导出到a盘名为a.sql的为文件里面 注意: 登录状态下无法进行操作!  1mysqldump -uroot -p000000 base&amp;gt;A:/a.sql  mysqldump: [Warning">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql使用指南 - 进阶篇">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/mysql数据库指南 - 进阶篇/index.html">
+<meta property="og:site_name" content="vkcyan">
+<meta property="og:description" content="备份与恢复备份 备份数据库内容 并不是备份数据库  在Navicat Premium里面直接双击数据库 右击数据库点击-&amp;gt; 转储sql文件 即可保存 在命令行里面 将root用户的base表到导出到a盘名为a.sql的为文件里面 注意: 登录状态下无法进行操作!  1mysqldump -uroot -p000000 base&amp;gt;A:/a.sql  mysqldump: [Warning">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-05T09:34:07.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql使用指南 - 进阶篇">
+<meta name="twitter:description" content="备份与恢复备份 备份数据库内容 并不是备份数据库  在Navicat Premium里面直接双击数据库 右击数据库点击-&amp;gt; 转储sql文件 即可保存 在命令行里面 将root用户的base表到导出到a盘名为a.sql的为文件里面 注意: 登录状态下无法进行操作!  1mysqldump -uroot -p000000 base&amp;gt;A:/a.sql  mysqldump: [Warning">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/mysql数据库指南 - 进阶篇/"/>
+
+
+
+
+
+  <title>mysql使用指南 - 进阶篇 | vkcyan</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?03823422b1f29a7b653557853acaae60";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vkcyan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">this is my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/mysql数据库指南 - 进阶篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vkcyan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://on7r0tqgu.bkt.clouddn.com/FtYgVsDgctT0KkcTOIF8bmSJ5aPi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vkcyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql使用指南 - 进阶篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T00:00:00+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/05/mysql数据库指南 - 进阶篇/" class="leancloud_visitors" data-flag-title="mysql使用指南 - 进阶篇">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2><h3 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h3><blockquote>
+<p>备份数据库内容 并不是备份数据库</p>
+</blockquote>
+<h4 id="在Navicat-Premium里面"><a href="#在Navicat-Premium里面" class="headerlink" title="在Navicat Premium里面"></a>在Navicat Premium里面</h4><p>直接双击数据库 右击数据库点击-&gt; 转储sql文件 即可保存</p>
+<h4 id="在命令行里面"><a href="#在命令行里面" class="headerlink" title="在命令行里面"></a>在命令行里面</h4><blockquote>
+<p>将root用户的base表到导出到a盘名为a.sql的为文件里面</p>
+<p>注意: 登录状态下无法进行操作!</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p000000 base&gt;A:/a.sql</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mysqldump: [Warning] Using a password on the command line interface can be insecure.</p>
+<p>可能出现这句话 这是警告说 在命令行使用密码不安全,可以忽略</p>
+</blockquote>
+<h3 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h3><h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><h5 id="没有登录的状态下"><a href="#没有登录的状态下" class="headerlink" title="没有登录的状态下"></a>没有登录的状态下</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p000000 base&lt;A:/a.sql</span><br></pre></td></tr></table></figure>
+<h5 id="登录状态下"><a href="#登录状态下" class="headerlink" title="登录状态下"></a>登录状态下</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> base;</span><br><span class="line"><span class="keyword">use</span> base;</span><br><span class="line">source a:/a.sql;  //即为导入</span><br></pre></td></tr></table></figure>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><h3 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h3><p>主键约束: 唯一标识 <strong>非空</strong> <strong>唯一</strong> <strong>被引用</strong></p>
+<p>当表的每一列被指定为主键的时候,该列不可以为空,不可以出现唯一的值</p>
+<h4 id="创建表指定主键"><a href="#创建表指定主键" class="headerlink" title="创建表指定主键"></a>创建表指定主键</h4><h5 id="指定主键-方式1"><a href="#指定主键-方式1" class="headerlink" title="指定主键 - 方式1"></a>指定主键 - 方式1</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp (</span><br><span class="line">	empno <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">	ename <span class="built_in">varchar</span>(<span class="number">50</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h5 id="指定主键-方式2"><a href="#指定主键-方式2" class="headerlink" title="指定主键 - 方式2"></a>指定主键 - 方式2</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp (</span><br><span class="line">    empno <span class="built_in">int</span>,</span><br><span class="line">    ename <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line">    primary <span class="keyword">key</span>(empno)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个错误就是主键出现了重复的意思</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1062 (23000): Duplicate entry &apos;x&apos; for key &apos;PRIMARY&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="修改表时指定主键"><a href="#修改表时指定主键" class="headerlink" title="修改表时指定主键"></a>修改表时指定主键</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table emp (</span><br><span class="line">    empno int,</span><br><span class="line">    ename varchar(50)</span><br><span class="line">);</span><br><span class="line">alter table emp add primary key(empno);</span><br></pre></td></tr></table></figure>
+<h4 id="删除主键"><a href="#删除主键" class="headerlink" title="删除主键"></a>删除主键</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> primary <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="主键自增长"><a href="#主键自增长" class="headerlink" title="主键自增长"></a>主键自增长</h4><blockquote>
+<p>auto_increment 类型必须int</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu (</span><br><span class="line">    <span class="keyword">sid</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">    sname <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line">    age <span class="built_in">int</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="literal">null</span>,<span class="string">'haha'</span>,<span class="number">18</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="非空约束"><a href="#非空约束" class="headerlink" title="非空约束"></a>非空约束</h3><blockquote>
+<p>not null</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table stu (</span><br><span class="line">    sid int primary key auto_increment,</span><br><span class="line">    sname varchar(50) not null,</span><br><span class="line">    age int</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="唯一约束"><a href="#唯一约束" class="headerlink" title="唯一约束"></a>唯一约束</h3><blockquote>
+<p>unique</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table stu (</span><br><span class="line">    sid int primary key auto_increment,</span><br><span class="line">    sname varchar(50) not null unique,</span><br><span class="line">    age int</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h3><h4 id="创建表添加外键约束"><a href="#创建表添加外键约束" class="headerlink" title="创建表添加外键约束"></a>创建表添加外键约束</h4><blockquote>
+<p>外键必须是每一个表的主键的值(外键要引用主键)</p>
+<p>外键可以重复</p>
+<p>外键可以为空</p>
+<p>一张表可以有多个外键</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//创建主表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept (</span><br><span class="line">	deptno <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">	dname <span class="built_in">varchar</span>(<span class="number">50</span>)</span><br><span class="line">)<span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line">//创建从表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp (</span><br><span class="line">	empno <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">	ename <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line">	don <span class="built_in">int</span>,</span><br><span class="line">	<span class="keyword">constraint</span> wj_emp_dept foreign <span class="keyword">key</span>(don) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">	//约束 xxx(外键名称) 外键(don) 引用  dept表的deptno列</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="已创建的表添加外键约束"><a href="#已创建的表添加外键约束" class="headerlink" title="已创建的表添加外键约束"></a>已创建的表添加外键约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp (</span><br><span class="line">	empno <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">	ename <span class="built_in">varchar</span>(<span class="number">50</span>),</span><br><span class="line">	don <span class="built_in">int</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">constraint</span> wj_emp_dept foreign <span class="keyword">key</span>(don) <span class="keyword">references</span> dept(deptno);</span><br><span class="line">改变 表 emp 添加 约束 (外键名称) 外键(don) 引用 dept表的deptno字段</span><br></pre></td></tr></table></figure>
+<h4 id="已创建的表删除外键约束"><a href="#已创建的表删除外键约束" class="headerlink" title="已创建的表删除外键约束"></a>已创建的表删除外键约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> foreign <span class="keyword">key</span> wj_emp_dept;</span><br></pre></td></tr></table></figure>
+<h3 id="一对一关系"><a href="#一对一关系" class="headerlink" title="一对一关系"></a>一对一关系</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//主表</span><br><span class="line">create table hasband (</span><br><span class="line">	hid int primary key auto_increment,</span><br><span class="line">	hname varchar(50)</span><br><span class="line">) default charset=utf8;</span><br><span class="line">//从表</span><br><span class="line">create table wife(</span><br><span class="line">	wid int primary key auto_increment,</span><br><span class="line">	wname varchar(50),</span><br><span class="line">	constraint fk_wife_hasband foreign key(wid) references hasband(hid)</span><br><span class="line">) default charset=utf8;</span><br><span class="line">//这里的wid即是主键也是外键 一对一的关键</span><br><span class="line">/*</span><br><span class="line">1. 非空</span><br><span class="line">2. 唯一</span><br><span class="line">3. 引用hid</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h3 id="多对多关系"><a href="#多对多关系" class="headerlink" title="多对多关系"></a>多对多关系</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//创建主表</span><br><span class="line">create table student(</span><br><span class="line">	sid int primary key auto_increment,</span><br><span class="line">	sname varchar(50)</span><br><span class="line">);</span><br><span class="line">create table teacher(</span><br><span class="line">	tid int primary key auto_increment,</span><br><span class="line">	tname varchar(50)</span><br><span class="line">);</span><br><span class="line">//管理表</span><br><span class="line">create table stu_sea(</span><br><span class="line">	sid int,</span><br><span class="line">	tid int,</span><br><span class="line">	constraint fk_student foreign key(sid) references student(sid),</span><br><span class="line">	constraint fk_teacher foreign key(tid) references teacher(tid)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>多对多 两个主表 在创建中间表 最后将关系都写在中间表里面</p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="合并结果集"><a href="#合并结果集" class="headerlink" title="合并结果集"></a>合并结果集</h3><blockquote>
+<p>要求两个<strong>结果集</strong>(查询结果)完全相同</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">create table ab values(1,&apos;&apos;</span><br><span class="line">1)(;</span><br><span class="line">	a int,</span><br><span class="line">	b varchar(50)</span><br><span class="line">);</span><br><span class="line">insert into ab values(1,&apos;1&apos;);</span><br><span class="line">insert into ab values(2,&apos;2&apos;);</span><br><span class="line">insert into ab values(3,&apos;3&apos;);</span><br><span class="line">create table cd (</span><br><span class="line">	c int,</span><br><span class="line">	d varchar(50)</span><br><span class="line">);</span><br><span class="line">insert into cd values(3,&apos;3&apos;);</span><br><span class="line">insert into cd values(4,&apos;4&apos;);</span><br><span class="line">insert into cd values(5,&apos;5&apos;);</span><br><span class="line"></span><br><span class="line">//合并结果集 (表头由第一个查询的表定)</span><br><span class="line">select * from ab union all select * from cd;</span><br><span class="line">+------+------+</span><br><span class="line">| a    | b    |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 | 1    |</span><br><span class="line">|    2 | 2    |</span><br><span class="line">|    3 | 3    |</span><br><span class="line">|    3 | 3    |</span><br><span class="line">|    4 | 4    |</span><br><span class="line">|    5 | 5    |</span><br><span class="line">+------+------+</span><br><span class="line">//不加all会将重复的过滤掉</span><br><span class="line">mysql&gt; select * from ab union select * from cd;</span><br><span class="line">+------+------+</span><br><span class="line">| a    | b    |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 | 1    |</span><br><span class="line">|    2 | 2    |</span><br><span class="line">|    3 | 3    |</span><br><span class="line">|    4 | 4    |</span><br><span class="line">|    5 | 5    |</span><br><span class="line">+------+------+</span><br></pre></td></tr></table></figure>
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><h4 id="方言"><a href="#方言" class="headerlink" title="方言"></a>方言</h4><blockquote>
+<p>格式: <strong>select * from 表1 as 别名1,表2 as 别名2 where 别名1.xx=别名2.xx</strong></p>
+</blockquote>
+<p>笛卡尔积</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp,dept; </span><br><span class="line">//会emp每一列与dept表连接</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加条件 去除不匹配数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp,dept where emp.deptno = dept.deptno;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>打印指定数据</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select emp.ename,emp.sal,dept.dname from emp,dept where emp.deptno = dept.deptno;</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| ename  | sal      | dname  |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| 甘宁   |  8000.00 | 学工部 |</span><br><span class="line">| 黛绮丝 | 16000.00 | 销售部 |</span><br><span class="line">| 殷天正 | 12500.00 | 销售部 |</span><br><span class="line">| 刘备   | 29750.00 | 学工部 |</span><br><span class="line">| 谢逊   | 12500.00 | 销售部 |</span><br><span class="line">| 关羽   | 28500.00 | 销售部 |</span><br><span class="line">| 张飞   | 24500.00 | 教研部 |</span><br><span class="line">| 诸葛亮 | 30000.00 | 学工部 |</span><br><span class="line">| 曾阿牛 | 50000.00 | 教研部 |</span><br><span class="line">| 韦一笑 | 15000.00 | 销售部 |</span><br><span class="line">| 周泰   | 11000.00 | 学工部 |</span><br><span class="line">| 程普   |  9500.00 | 销售部 |</span><br><span class="line">| 庞统   | 30000.00 | 学工部 |</span><br><span class="line">| 黄盖   | 13000.00 | 教研部 |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>给表起别名</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname <span class="keyword">from</span> emp <span class="keyword">as</span> e,dept <span class="keyword">as</span> d <span class="keyword">where</span> e.deptno = d.deptno;</span><br></pre></td></tr></table></figure>
+<h4 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h4><blockquote>
+<p>inner join</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname <span class="keyword">from</span> emp <span class="keyword">as</span> e <span class="keyword">inner</span> <span class="keyword">join</span> dept <span class="keyword">as</span> d <span class="keyword">on</span> e.deptno = d.deptno;</span><br></pre></td></tr></table></figure>
+<h4 id="自然"><a href="#自然" class="headerlink" title="自然"></a>自然</h4><blockquote>
+<p> natural join 标准的简化写法 自动匹配相同的字段</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname <span class="keyword">from</span> emp <span class="keyword">as</span> e <span class="keyword">natural</span> <span class="keyword">join</span> dept d;</span><br></pre></td></tr></table></figure>
+<h5 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h5><blockquote>
+<p>外连接有一主一次 左外即左表为主</p>
+<p>这里以emp表为主,name主表中所有记录都无论条件是否满足,都会打印出来</p>
+<p>不满足条件会用null作为右表的补位</p>
+</blockquote>
+<h6 id="左连接"><a href="#左连接" class="headerlink" title="左连接"></a>左连接</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname </span><br><span class="line"><span class="keyword">from</span> emp <span class="keyword">as</span> e <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d </span><br><span class="line"><span class="keyword">on</span> e.deptno=d.deptno;</span><br></pre></td></tr></table></figure>
+<h6 id="右链接"><a href="#右链接" class="headerlink" title="右链接"></a>右链接</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,e.sal,d.dname</span><br><span class="line"><span class="keyword">from</span> emp <span class="keyword">as</span> e <span class="keyword">right</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d</span><br><span class="line"><span class="keyword">on</span> e.deptno=d.deptno;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>假如决定null数据不合适可以使用ifnull去替换</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(e.ename,<span class="string">'无员工'</span>) ename,e.sal,d.dname <span class="keyword">from</span> emp <span class="keyword">as</span> e <span class="keyword">right</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| ename  | sal      | dname  |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| 甘宁   |  8000.00 | 学工部 |</span><br><span class="line">| 黛绮丝 | 16000.00 | 销售部 |</span><br><span class="line">| 殷天正 | 12500.00 | 销售部 |</span><br><span class="line">| 刘备   | 29750.00 | 学工部 |</span><br><span class="line">| 谢逊   | 12500.00 | 销售部 |</span><br><span class="line">| 关羽   | 28500.00 | 销售部 |</span><br><span class="line">| 张飞   | 24500.00 | 教研部 |</span><br><span class="line">| 诸葛亮 | 30000.00 | 学工部 |</span><br><span class="line">| 曾阿牛 | 50000.00 | 教研部 |</span><br><span class="line">| 韦一笑 | 15000.00 | 销售部 |</span><br><span class="line">| 周泰   | 11000.00 | 学工部 |</span><br><span class="line">| 程普   |  9500.00 | 销售部 |</span><br><span class="line">| 庞统   | 30000.00 | 学工部 |</span><br><span class="line">| 黄盖   | 13000.00 | 教研部 |</span><br><span class="line">| 无员工 |     NULL | 财务部 |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br></pre></td></tr></table></figure>
+<h6 id="全连接"><a href="#全连接" class="headerlink" title="全连接"></a>全连接</h6><blockquote>
+<p>使用关键字 union合并结果集</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select e.ename,e.sal,d.dname </span><br><span class="line">from emp as e left outer join dept d </span><br><span class="line">on e.deptno=d.deptno</span><br><span class="line">union</span><br><span class="line">select e.ename,e.sal,d.dname</span><br><span class="line">from emp as e right outer join dept d</span><br><span class="line">on e.deptno=d.deptno;</span><br></pre></td></tr></table></figure>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><blockquote>
+<p>查询sal字段最高的行的详细信息</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from emp where sal=(select max(sal) from emp);</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 | NULL |     10 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br></pre></td></tr></table></figure>
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*创建部门表*/</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> dept(</span><br><span class="line">	deptno		<span class="built_in">INT</span> 	PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">	dname		<span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">	loc 		<span class="built_in">VARCHAR</span>(<span class="number">50</span>)</span><br><span class="line">) <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建雇员表*/</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> emp(</span><br><span class="line">	empno		<span class="built_in">INT</span> 	PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">	ename		<span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">	job		<span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">	mgr		<span class="built_in">INT</span>,</span><br><span class="line">	hiredate	<span class="built_in">DATE</span>,</span><br><span class="line">	sal		<span class="built_in">DECIMAL</span>(<span class="number">7</span>,<span class="number">2</span>),</span><br><span class="line">	COMM 		<span class="built_in">DECIMAL</span>(<span class="number">7</span>,<span class="number">2</span>),</span><br><span class="line">	deptno		<span class="built_in">INT</span>,</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> fk_emp FOREIGN <span class="keyword">KEY</span>(mgr) <span class="keyword">REFERENCES</span> emp(empno)</span><br><span class="line">) <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建工资等级表*/</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> salgrade(</span><br><span class="line">	grade		<span class="built_in">INT</span> 	PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">	losal		<span class="built_in">INT</span>,</span><br><span class="line">	hisal		<span class="built_in">INT</span></span><br><span class="line">) <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"><span class="comment">/*插入dept表数据*/</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> dept <span class="keyword">VALUES</span> (<span class="number">10</span>, <span class="string">'教研部'</span>, <span class="string">'北京'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> dept <span class="keyword">VALUES</span> (<span class="number">20</span>, <span class="string">'学工部'</span>, <span class="string">'上海'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> dept <span class="keyword">VALUES</span> (<span class="number">30</span>, <span class="string">'销售部'</span>, <span class="string">'广州'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> dept <span class="keyword">VALUES</span> (<span class="number">40</span>, <span class="string">'财务部'</span>, <span class="string">'武汉'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*插入emp表数据*/</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1009</span>, <span class="string">'曾阿牛'</span>, <span class="string">'董事长'</span>, <span class="literal">NULL</span>, <span class="string">'2001-11-17'</span>, <span class="number">50000</span>, <span class="literal">NULL</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1004</span>, <span class="string">'刘备'</span>, <span class="string">'经理'</span>, <span class="number">1009</span>, <span class="string">'2001-04-02'</span>, <span class="number">29750</span>, <span class="literal">NULL</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1006</span>, <span class="string">'关羽'</span>, <span class="string">'经理'</span>, <span class="number">1009</span>, <span class="string">'2001-05-01'</span>, <span class="number">28500</span>, <span class="literal">NULL</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1007</span>, <span class="string">'张飞'</span>, <span class="string">'经理'</span>, <span class="number">1009</span>, <span class="string">'2001-09-01'</span>, <span class="number">24500</span>, <span class="literal">NULL</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1008</span>, <span class="string">'诸葛亮'</span>, <span class="string">'分析师'</span>, <span class="number">1004</span>, <span class="string">'2007-04-19'</span>, <span class="number">30000</span>, <span class="literal">NULL</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1013</span>, <span class="string">'庞统'</span>, <span class="string">'分析师'</span>, <span class="number">1004</span>, <span class="string">'2001-12-03'</span>, <span class="number">30000</span>, <span class="literal">NULL</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1002</span>, <span class="string">'黛绮丝'</span>, <span class="string">'销售员'</span>, <span class="number">1006</span>, <span class="string">'2001-02-20'</span>, <span class="number">16000</span>, <span class="number">3000</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1003</span>, <span class="string">'殷天正'</span>, <span class="string">'销售员'</span>, <span class="number">1006</span>, <span class="string">'2001-02-22'</span>, <span class="number">12500</span>, <span class="number">5000</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1005</span>, <span class="string">'谢逊'</span>, <span class="string">'销售员'</span>, <span class="number">1006</span>, <span class="string">'2001-09-28'</span>, <span class="number">12500</span>, <span class="number">14000</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1010</span>, <span class="string">'韦一笑'</span>, <span class="string">'销售员'</span>, <span class="number">1006</span>, <span class="string">'2001-09-08'</span>, <span class="number">15000</span>, <span class="number">0</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1012</span>, <span class="string">'程普'</span>, <span class="string">'文员'</span>, <span class="number">1006</span>, <span class="string">'2001-12-03'</span>, <span class="number">9500</span>, <span class="literal">NULL</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1014</span>, <span class="string">'黄盖'</span>, <span class="string">'文员'</span>, <span class="number">1007</span>, <span class="string">'2002-01-23'</span>, <span class="number">13000</span>, <span class="literal">NULL</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1011</span>, <span class="string">'周泰'</span>, <span class="string">'文员'</span>, <span class="number">1008</span>, <span class="string">'2007-05-23'</span>, <span class="number">11000</span>, <span class="literal">NULL</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span> (<span class="number">1001</span>, <span class="string">'甘宁'</span>, <span class="string">'文员'</span>, <span class="number">1013</span>, <span class="string">'2000-12-17'</span>, <span class="number">8000</span>, <span class="literal">NULL</span>, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*插入salgrade表数据*/</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">7000</span>, <span class="number">12000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="number">12010</span>, <span class="number">14000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="number">14010</span>, <span class="number">20000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="number">20010</span>, <span class="number">30000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span> (<span class="number">5</span>, <span class="number">30010</span>, <span class="number">99990</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="查询至少有一个员工的部门-显示部门编号-部门名称-部门位置-部门人数"><a href="#查询至少有一个员工的部门-显示部门编号-部门名称-部门位置-部门人数" class="headerlink" title="查询至少有一个员工的部门,显示部门编号,部门名称,部门位置,部门人数"></a>查询至少有一个员工的部门,显示部门编号,部门名称,部门位置,部门人数</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> d.*,z1.cou</span><br><span class="line"><span class="keyword">from</span> dept d,(<span class="keyword">select</span> deptno,<span class="keyword">count</span>(*) cou <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno) z1  //笛卡尔积</span><br><span class="line"><span class="keyword">where</span> d.deptno=z1.deptno;</span><br></pre></td></tr></table></figure>
+<h5 id="列出所有员工的姓名及其直接上司的名字"><a href="#列出所有员工的姓名及其直接上司的名字" class="headerlink" title="列出所有员工的姓名及其直接上司的名字"></a>列出所有员工的姓名及其直接上司的名字</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//首先使用笛卡尔积来统一匹配</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp e,emp p;</span><br><span class="line">在去把员工的上司编号与上司编号去匹配 加个别名</span><br><span class="line"><span class="keyword">select</span> e.ename <span class="keyword">as</span> <span class="string">'上司'</span>,p.ename <span class="keyword">as</span> <span class="string">'员工'</span> <span class="keyword">from</span> emp e,emp p <span class="keyword">where</span> e.empno=p.mgr;</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br><span class="line">| 上司   | 员工   |</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br><span class="line">| 庞统   | 甘宁   |</span><br><span class="line">| 关羽   | 黛绮丝 |</span><br><span class="line">| 关羽   | 殷天正 |</span><br><span class="line">| 曾阿牛 | 刘备   |</span><br><span class="line">| 关羽   | 谢逊   |</span><br><span class="line">| 曾阿牛 | 关羽   |</span><br><span class="line">| 曾阿牛 | 张飞   |</span><br><span class="line">| 刘备   | 诸葛亮 |</span><br><span class="line">| 关羽   | 韦一笑 |</span><br><span class="line">| 诸葛亮 | 周泰   |</span><br><span class="line">| 关羽   | 程普   |</span><br><span class="line">| 刘备   | 庞统   |</span><br><span class="line">| 张飞   | 黄盖   |</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出受雇日期早于直接上级的所有员工及编号-姓名-部门"><a href="#列出受雇日期早于直接上级的所有员工及编号-姓名-部门" class="headerlink" title="列出受雇日期早于直接上级的所有员工及编号.姓名,部门"></a>列出受雇日期早于直接上级的所有员工及编号.姓名,部门</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">//首先 列出所有员工受雇时间,员工编号 和领导受雇时间</span><br><span class="line"><span class="keyword">select</span> e.empno,e.ename,e.hiredate,p.ename,p.hiredate <span class="keyword">from</span> emp e,emp p <span class="keyword">where</span> e.mgr=p.empno;</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">| empno | ename  | hiredate   | ename  | hiredate   |</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">|  1001 | 甘宁   | 2000-12-17 | 庞统   | 2001-12-03 |</span><br><span class="line">|  1002 | 黛绮丝 | 2001-02-20 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1003 | 殷天正 | 2001-02-22 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1004 | 刘备   | 2001-04-02 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">|  1005 | 谢逊   | 2001-09-28 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1006 | 关羽   | 2001-05-01 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">|  1007 | 张飞   | 2001-09-01 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">|  1008 | 诸葛亮 | 2007-04-19 | 刘备   | 2001-04-02 |</span><br><span class="line">|  1010 | 韦一笑 | 2001-09-08 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1011 | 周泰   | 2007-05-23 | 诸葛亮 | 2007-04-19 |</span><br><span class="line">|  1012 | 程普   | 2001-12-03 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1013 | 庞统   | 2001-12-03 | 刘备   | 2001-04-02 |</span><br><span class="line">|  1014 | 黄盖   | 2002-01-23 | 张飞   | 2001-09-01 |</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">//将受雇时间早于上级的过滤下来</span><br><span class="line"><span class="keyword">select</span> e.empno,e.ename,e.hiredate,p.ename,p.hiredate <span class="keyword">from</span> emp e,emp p <span class="keyword">where</span> e.mgr=p.empno <span class="keyword">and</span> e.hiredate&lt;p.hiredate;</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">| empno | ename  | hiredate   | ename  | hiredate   |</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">|  1001 | 甘宁   | 2000-12-17 | 庞统   | 2001-12-03 |</span><br><span class="line">|  1002 | 黛绮丝 | 2001-02-20 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1003 | 殷天正 | 2001-02-22 | 关羽   | 2001-05-01 |</span><br><span class="line">|  1004 | 刘备   | 2001-04-02 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">|  1006 | 关羽   | 2001-05-01 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">|  1007 | 张飞   | 2001-09-01 | 曾阿牛 | 2001-11-17 |</span><br><span class="line">+<span class="comment">-------+--------+------------+--------+------------+</span></span><br><span class="line">//最后获取部门名称  判断人员表的部门号与部门表的部门号匹配即可 把没用的去掉</span><br><span class="line">mysql&gt; select e.empno '编号',e.ename '员工',d.dname '部门' from emp e,emp p,dept d whe</span><br><span class="line">re e.mgr=p.empno and e.hiredate&lt;p.hiredate and e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">------+--------+--------+</span></span><br><span class="line">| 编号 | 员工   | 部门   |</span><br><span class="line">+<span class="comment">------+--------+--------+</span></span><br><span class="line">| 1001 | 甘宁   | 学工部 |</span><br><span class="line">| 1002 | 黛绮丝 | 销售部 |</span><br><span class="line">| 1003 | 殷天正 | 销售部 |</span><br><span class="line">| 1004 | 刘备   | 学工部 |</span><br><span class="line">| 1006 | 关羽   | 销售部 |</span><br><span class="line">| 1007 | 张飞   | 教研部 |</span><br><span class="line">+<span class="comment">------+--------+--------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出部门名称和这些部门的员工信息-同时列出没有员工的部门"><a href="#列出部门名称和这些部门的员工信息-同时列出没有员工的部门" class="headerlink" title="列出部门名称和这些部门的员工信息 同时列出没有员工的部门"></a>列出部门名称和这些部门的员工信息 同时列出没有员工的部门</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//首先获取员工信息对应的部门名称</span><br><span class="line">mysql&gt; select e.*,d.dname from dept d,emp e where e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM     | deptno | dname  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br><span class="line">|  1001 | 甘宁   | 文员   | 1013 | 2000-12-17 |  8000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1002 | 黛绮丝 | 销售员 | 1006 | 2001-02-20 | 16000.00 |  3000.00 |     30 | 销售部 |</span><br><span class="line">|  1003 | 殷天正 | 销售员 | 1006 | 2001-02-22 | 12500.00 |  5000.00 |     30 | 销售部 |</span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1005 | 谢逊   | 销售员 | 1006 | 2001-09-28 | 12500.00 | 14000.00 |     30 | 销售部 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 |     NULL |     30 | 销售部 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 |     NULL |     10 | 教研部 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 |     NULL |     10 | 教研部 |</span><br><span class="line">|  1010 | 韦一笑 | 销售员 | 1006 | 2001-09-08 | 15000.00 |     0.00 |     30 | 销售部 |</span><br><span class="line">|  1011 | 周泰   | 文员   | 1008 | 2007-05-23 | 11000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1012 | 程普   | 文员   | 1006 | 2001-12-03 |  9500.00 |     NULL |     30 | 销售部 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1014 | 黄盖   | 文员   | 1007 | 2002-01-23 | 13000.00 |     NULL |     10 | 教研部 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br><span class="line">//这里要求没用员工的部门也列出来,随意要使用右连接</span><br><span class="line">mysql&gt; select e.*,d.dname from emp e right outer join dept d on e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM     | deptno | dname  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br><span class="line">|  1001 | 甘宁   | 文员   | 1013 | 2000-12-17 |  8000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1002 | 黛绮丝 | 销售员 | 1006 | 2001-02-20 | 16000.00 |  3000.00 |     30 | 销售部 |</span><br><span class="line">|  1003 | 殷天正 | 销售员 | 1006 | 2001-02-22 | 12500.00 |  5000.00 |     30 | 销售部 |</span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1005 | 谢逊   | 销售员 | 1006 | 2001-09-28 | 12500.00 | 14000.00 |     30 | 销售部 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 |     NULL |     30 | 销售部 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 |     NULL |     10 | 教研部 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 |     NULL |     10 | 教研部 |</span><br><span class="line">|  1010 | 韦一笑 | 销售员 | 1006 | 2001-09-08 | 15000.00 |     0.00 |     30 | 销售部 |</span><br><span class="line">|  1011 | 周泰   | 文员   | 1008 | 2007-05-23 | 11000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1012 | 程普   | 文员   | 1006 | 2001-12-03 |  9500.00 |     NULL |     30 | 销售部 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 |     NULL |     20 | 学工部 |</span><br><span class="line">|  1014 | 黄盖   | 文员   | 1007 | 2002-01-23 | 13000.00 |     NULL |     10 | 教研部 |</span><br><span class="line">|  NULL | NULL   | NULL   | NULL | NULL       |     NULL |     NULL |   NULL | 财务部 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+----------+--------+--------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出薪资大于15000的各种工作以及从事此工作的员工人数"><a href="#列出薪资大于15000的各种工作以及从事此工作的员工人数" class="headerlink" title="列出薪资大于15000的各种工作以及从事此工作的员工人数"></a>列出薪资大于15000的各种工作以及从事此工作的员工人数</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//首先获取各种工作</span><br><span class="line"><span class="keyword">select</span> job,<span class="keyword">count</span>(*) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job;</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br><span class="line">| job    | count(*) |</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br><span class="line">| 分析师 |        2 |</span><br><span class="line">| 文员   |        4 |</span><br><span class="line">| 经理   |        3 |</span><br><span class="line">| 董事长 |        1 |</span><br><span class="line">| 销售员 |        4 |</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br><span class="line">这里列出薪资大于15000,是对分组后的人进行条件查询,所以使用having</span><br><span class="line"><span class="keyword">select</span> job,<span class="keyword">count</span>(*) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> job <span class="keyword">having</span> <span class="keyword">min</span>(sal) &gt;<span class="number">15000</span>;</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br><span class="line">| job    | count(*) |</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br><span class="line">| 分析师 |        2 |</span><br><span class="line">| 经理   |        3 |</span><br><span class="line">| 董事长 |        1 |</span><br><span class="line">+<span class="comment">--------+----------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出在销售部工作的员工姓名-不能通过员工编号获取"><a href="#列出在销售部工作的员工姓名-不能通过员工编号获取" class="headerlink" title="列出在销售部工作的员工姓名,不能通过员工编号获取"></a>列出在销售部工作的员工姓名,不能通过员工编号获取</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//假设知道员工编号</span><br><span class="line">mysql&gt; select ename,deptno from emp where deptno='30';</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br><span class="line">| ename  | deptno |</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br><span class="line">| 黛绮丝 |     30 |</span><br><span class="line">| 殷天正 |     30 |</span><br><span class="line">| 谢逊   |     30 |</span><br><span class="line">| 关羽   |     30 |</span><br><span class="line">| 韦一笑 |     30 |</span><br><span class="line">| 程普   |     30 |</span><br><span class="line">+<span class="comment">--------+--------+</span></span><br><span class="line">//这里通过子查询去dept表获取销售部的编号</span><br><span class="line">mysql&gt; select ename from emp where deptno=(select deptno from dept where dname='销售部');</span><br><span class="line">+<span class="comment">--------+ </span></span><br><span class="line">| ename  | </span><br><span class="line">+<span class="comment">--------+ </span></span><br><span class="line">| 黛绮丝 |    </span><br><span class="line">| 殷天正 |    </span><br><span class="line">| 谢逊   |   </span><br><span class="line">| 关羽   |   </span><br><span class="line">| 韦一笑 |    </span><br><span class="line">| 程普   |   </span><br><span class="line">+<span class="comment">--------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出薪资高于平均薪资的员工信息-所在部门-上级领导-工资等级"><a href="#列出薪资高于平均薪资的员工信息-所在部门-上级领导-工资等级" class="headerlink" title="列出薪资高于平均薪资的员工信息,所在部门,上级领导,工资等级"></a>列出薪资高于平均薪资的员工信息,所在部门,上级领导,工资等级</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">//首先查出高于平均工资的</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp);</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 | NULL |     20 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 | NULL |     30 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 | NULL |     10 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 |</span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 | NULL |     10 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">//加上部门名称</span><br><span class="line"><span class="keyword">select</span> e.*,d.dname </span><br><span class="line"><span class="keyword">from</span> emp e,dept d </span><br><span class="line"><span class="keyword">where</span> sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp) <span class="keyword">and</span> e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno | dname  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 | NULL |     20 | 学工部 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 | NULL |     30 | 销售部 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 | NULL |     10 | 教研部 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 | 学工部 |</span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 | NULL |     10 | 教研部 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 | 学工部 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br><span class="line">//加上级领导</span><br><span class="line"><span class="keyword">select</span> e.*,d.dname,p.ename</span><br><span class="line"><span class="keyword">from</span> emp e,dept d,emp p</span><br><span class="line"><span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp) <span class="keyword">and</span> e.deptno=d.deptno <span class="keyword">and</span> e.mgr=p.empno;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno | dname  | ename  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+</span></span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 | NULL |     20 | 学工部 | 曾阿牛 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 | NULL |     30 | 销售部 | 曾阿牛 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 | NULL |     10 | 教研部 | 曾阿牛 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 | 学工部 | 刘备   |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 | 学工部 | 刘备   |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+</span></span><br><span class="line">//加薪资等级</span><br><span class="line"><span class="keyword">select</span> e.*,d.dname,p.ename,s.grade <span class="string">'薪资等级'</span></span><br><span class="line"><span class="keyword">from</span> emp e,dept d,emp p,salgrade s</span><br><span class="line"><span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp) <span class="keyword">and</span> e.deptno=d.deptno <span class="keyword">and</span> e.mgr=p.empno <span class="keyword">and</span> e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno | dname  | ename  | 薪资等级 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 | NULL |     20 | 学工部 | 曾阿牛 |        4 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 | NULL |     30 | 销售部 | 曾阿牛 |        4 |</span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 | NULL |     10 | 教研部 | 曾阿牛 |        4 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 | 学工部 | 刘备   |        4 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 | 学工部 | 刘备   |        4 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br><span class="line">//最后把高于平均薪资的员工信息,但是因为上级领导被过滤掉的通过左连接显示出来</span><br><span class="line"><span class="keyword">select</span> e.*,d.dname,p.ename,s.grade <span class="string">'薪资等级'</span></span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	emp e <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.deptno=d.deptno</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> emp p <span class="keyword">on</span> e.mgr=p.empno</span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> salgrade s <span class="keyword">on</span> e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal</span><br><span class="line"><span class="keyword">where</span> e.sal&gt;(<span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp);</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno | dname  | ename  | 薪资等级 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br><span class="line">|  1007 | 张飞   | 经理   | 1009 | 2001-09-01 | 24500.00 | NULL |     10 | 教研部 | 曾阿牛 |        4 |</span><br><span class="line">|  1004 | 刘备   | 经理   | 1009 | 2001-04-02 | 29750.00 | NULL |     20 | 学工部 | 曾阿牛 |        4 |</span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 | 学工部 | 刘备   |        4 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 | 学工部 | 刘备   |        4 |</span><br><span class="line">|  1006 | 关羽   | 经理   | 1009 | 2001-05-01 | 28500.00 | NULL |     30 | 销售部 | 曾阿牛 |        4 |</span><br><span class="line">|  1009 | 曾阿牛 | 董事长 | NULL | 2001-11-17 | 50000.00 | NULL |     10 | 教研部 | NULL   |        5 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+--------+----------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出与庞统从事相同工作的所有员工及部门名称"><a href="#列出与庞统从事相同工作的所有员工及部门名称" class="headerlink" title="列出与庞统从事相同工作的所有员工及部门名称"></a>列出与庞统从事相同工作的所有员工及部门名称</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//首先获取与庞统从事相同工作的所有员工</span><br><span class="line">mysql&gt; select * from emp  where job=(select job from emp where ename='庞统');</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20  |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+</span></span><br><span class="line">//查询部门</span><br><span class="line"><span class="keyword">select</span> e.*,d.dname <span class="keyword">from</span> emp e,dept d <span class="keyword">where</span> job=(<span class="keyword">select</span> job <span class="keyword">from</span> emp <span class="keyword">where</span> ename=<span class="string">'庞统'</span>) <span class="keyword">and</span> e.deptno=d.deptno;</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br><span class="line">| empno | ename  | job    | mgr  | hiredate   | sal      | COMM | deptno | dname  |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br><span class="line">|  1008 | 诸葛亮 | 分析师 | 1004 | 2007-04-19 | 30000.00 | NULL |     20 | 学工部 |</span><br><span class="line">|  1013 | 庞统   | 分析师 | 1004 | 2001-12-03 | 30000.00 | NULL |     20 | 学工部 |</span><br><span class="line">+<span class="comment">-------+--------+--------+------+------------+----------+------+--------+--------+</span></span><br></pre></td></tr></table></figure>
+<h5 id="列出薪资高于30部门的所有员工的姓名-薪资-部门名称"><a href="#列出薪资高于30部门的所有员工的姓名-薪资-部门名称" class="headerlink" title="列出薪资高于30部门的所有员工的姓名,薪资,部门名称"></a>列出薪资高于30部门的所有员工的姓名,薪资,部门名称</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select e.ename,e.sal,d.dname from emp e,dept d where e.deptno=d.deptno and sal&gt; (select max(sal) from emp where deptno='30');</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| ename  | sal      | dname  |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br><span class="line">| 刘备   | 29750.00 | 学工部 |</span><br><span class="line">| 诸葛亮 | 30000.00 | 学工部 |</span><br><span class="line">| 曾阿牛 | 50000.00 | 教研部 |</span><br><span class="line">| 庞统   | 30000.00 | 学工部 |</span><br><span class="line">+<span class="comment">--------+----------+--------+</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/04/第一次使用mpvue的记录/" rel="next" title="对第一次使用mpvue的一次记录">
+                <i class="fa fa-chevron-left"></i> 对第一次使用mpvue的一次记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/05/mysql 思维导图/" rel="prev" title="mysql思维导图">
+                mysql思维导图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODM3MS8xNDg5OQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://on7r0tqgu.bkt.clouddn.com/FtYgVsDgctT0KkcTOIF8bmSJ5aPi.jpg"
+                alt="vkcyan" />
+            
+              <p class="site-author-name" itemprop="name">vkcyan</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript node.js java docker 杂谈 记录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/boold" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#备份与恢复"><span class="nav-number">1.</span> <span class="nav-text">备份与恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份"><span class="nav-number">1.1.</span> <span class="nav-text">备份</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在Navicat-Premium里面"><span class="nav-number">1.1.1.</span> <span class="nav-text">在Navicat Premium里面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在命令行里面"><span class="nav-number">1.1.2.</span> <span class="nav-text">在命令行里面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复"><span class="nav-number">1.2.</span> <span class="nav-text">恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令行"><span class="nav-number">1.2.1.</span> <span class="nav-text">命令行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#没有登录的状态下"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">没有登录的状态下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登录状态下"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">登录状态下</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约束"><span class="nav-number">2.</span> <span class="nav-text">约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键约束"><span class="nav-number">2.1.</span> <span class="nav-text">主键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表指定主键"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建表指定主键</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#指定主键-方式1"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">指定主键 - 方式1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定主键-方式2"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">指定主键 - 方式2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改表时指定主键"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">修改表时指定主键</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除主键"><span class="nav-number">2.1.2.</span> <span class="nav-text">删除主键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主键自增长"><span class="nav-number">2.1.3.</span> <span class="nav-text">主键自增长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非空约束"><span class="nav-number">2.2.</span> <span class="nav-text">非空约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一约束"><span class="nav-number">2.3.</span> <span class="nav-text">唯一约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键约束"><span class="nav-number">2.4.</span> <span class="nav-text">外键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表添加外键约束"><span class="nav-number">2.4.1.</span> <span class="nav-text">创建表添加外键约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#已创建的表添加外键约束"><span class="nav-number">2.4.2.</span> <span class="nav-text">已创建的表添加外键约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#已创建的表删除外键约束"><span class="nav-number">2.4.3.</span> <span class="nav-text">已创建的表删除外键约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一关系"><span class="nav-number">2.5.</span> <span class="nav-text">一对一关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多对多关系"><span class="nav-number">2.6.</span> <span class="nav-text">多对多关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">3.</span> <span class="nav-text">多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合并结果集"><span class="nav-number">3.1.</span> <span class="nav-text">合并结果集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接查询"><span class="nav-number">3.2.</span> <span class="nav-text">连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方言"><span class="nav-number">3.2.1.</span> <span class="nav-text">方言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准"><span class="nav-number">3.2.2.</span> <span class="nav-text">标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自然"><span class="nav-number">3.2.3.</span> <span class="nav-text">自然</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#外连接"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">外连接</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#左连接"><span class="nav-number">3.2.3.1.1.</span> <span class="nav-text">左连接</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#右链接"><span class="nav-number">3.2.3.1.2.</span> <span class="nav-text">右链接</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#全连接"><span class="nav-number">3.2.3.1.3.</span> <span class="nav-text">全连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">3.3.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战"><span class="nav-number">3.4.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查询至少有一个员工的部门-显示部门编号-部门名称-部门位置-部门人数"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">查询至少有一个员工的部门,显示部门编号,部门名称,部门位置,部门人数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出所有员工的姓名及其直接上司的名字"><span class="nav-number">3.4.0.2.</span> <span class="nav-text">列出所有员工的姓名及其直接上司的名字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出受雇日期早于直接上级的所有员工及编号-姓名-部门"><span class="nav-number">3.4.0.3.</span> <span class="nav-text">列出受雇日期早于直接上级的所有员工及编号.姓名,部门</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出部门名称和这些部门的员工信息-同时列出没有员工的部门"><span class="nav-number">3.4.0.4.</span> <span class="nav-text">列出部门名称和这些部门的员工信息 同时列出没有员工的部门</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出薪资大于15000的各种工作以及从事此工作的员工人数"><span class="nav-number">3.4.0.5.</span> <span class="nav-text">列出薪资大于15000的各种工作以及从事此工作的员工人数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出在销售部工作的员工姓名-不能通过员工编号获取"><span class="nav-number">3.4.0.6.</span> <span class="nav-text">列出在销售部工作的员工姓名,不能通过员工编号获取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出薪资高于平均薪资的员工信息-所在部门-上级领导-工资等级"><span class="nav-number">3.4.0.7.</span> <span class="nav-text">列出薪资高于平均薪资的员工信息,所在部门,上级领导,工资等级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出与庞统从事相同工作的所有员工及部门名称"><span class="nav-number">3.4.0.8.</span> <span class="nav-text">列出与庞统从事相同工作的所有员工及部门名称</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出薪资高于30部门的所有员工的姓名-薪资-部门名称"><span class="nav-number">3.4.0.9.</span> <span class="nav-text">列出薪资高于30部门的所有员工的姓名,薪资,部门名称</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vkcyan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("5MdDFcYptJqTmprRBrxskr6y-gzGzoHsz", "iruhNcbrugNxR3rNmmgPRad5");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
