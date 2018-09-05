@@ -2,9 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/04/29/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%A0%A1%E6%8B%9B%E9%97%AE%E9%A2%98%EF%BC%88%E6%80%BB%E7%BB%93%EF%BC%89/</loc>
+    
+    <lastmod>2018-09-05T01:57:49.114Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/28/vue-router%20%E4%B8%8E%20vuex/</loc>
+    
+    <lastmod>2018-09-05T01:56:16.600Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/15/es6/</loc>
+    
+    <lastmod>2018-09-05T01:54:43.447Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/20/JavaScript%20%E5%BC%82%E6%AD%A5%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</loc>
+    
+    <lastmod>2018-09-05T01:53:24.988Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/20/cookie%20sessionStorage%20localStorage%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
+    
+    <lastmod>2018-09-05T01:51:29.467Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/28/vue-MYCLI/</loc>
+    
+    <lastmod>2018-09-05T01:50:00.225Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/09/05/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAMVVM%E6%A1%86%E6%9E%B6/</loc>
+    
+    <lastmod>2018-09-05T01:47:45.537Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2018-09-05T01:37:22.572Z</lastmod>
+    <lastmod>2018-09-05T01:43:53.067Z</lastmod>
     
   </url>
   
@@ -47,20 +96,6 @@
     <loc>http://yoursite.com/2018/07/30/call%20apply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2018-07-31T02:18:12.650Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/04/10/js%E9%9D%A2%E8%AF%95%E9%A2%98%204-10%20/</loc>
-    
-    <lastmod>2018-07-31T01:24:50.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/07/31/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BA%93%207-31/</loc>
-    
-    <lastmod>2018-07-31T01:18:33.110Z</lastmod>
     
   </url>
   
@@ -159,13 +194,6 @@
     <loc>http://yoursite.com/2018/03/02/mysql%E4%B8%BB%E9%94%AE%E5%BD%92%E9%9B%B6/</loc>
     
     <lastmod>2018-07-30T01:59:07.707Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/04/29/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%A0%A1%E6%8B%9B%E9%97%AE%E9%A2%98%EF%BC%88%E6%80%BB%E7%BB%93%EF%BC%89/</loc>
-    
-    <lastmod>2018-07-26T13:03:10.772Z</lastmod>
     
   </url>
   
