@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2020/04/19/2020%E5%B9%B44%E6%9C%8819%E5%8F%B7%20%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/</loc>
+    <loc>http://yoursite.com/2020/04/29/webpack%E6%89%93%E5%8C%85%E5%99%A8%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/</loc>
     
-    <lastmod>2020-04-19T14:55:57.119Z</lastmod>
+    <lastmod>2020-04-29T02:32:06.347Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/04/29/webpack%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2020-04-29T02:20:40.012Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2020-04-19T11:51:41.466Z</lastmod>
+    <lastmod>2020-04-29T02:01:57.828Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/04/19/2020%E5%B9%B44%E6%9C%8819%E5%8F%B7%20%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/</loc>
+    
+    <lastmod>2020-04-19T14:55:57.119Z</lastmod>
     
   </url>
   
@@ -341,13 +355,6 @@
     <loc>http://yoursite.com/404.html</loc>
     
     <lastmod>2018-07-26T06:33:24.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index-1.html</loc>
-    
-    <lastmod>2018-07-26T06:27:55.000Z</lastmod>
     
   </url>
   
